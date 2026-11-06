@@ -319,7 +319,8 @@ export const performSearchWithMeta = (
     };
   }
 
-  const trimmedTerm = term.trim();
+  // The dictionary stores romanization in NFC; keyboard input may use combining marks.
+  const trimmedTerm = term.trim().normalize("NFC");
   const likeTerm = `%${trimmedTerm}%`;
   const queries: Record<SearchMode, string> = {
     hokkien_entry:
